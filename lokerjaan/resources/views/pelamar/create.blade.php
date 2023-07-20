@@ -8,16 +8,18 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-lg-8">
         <form method="post"action="/pelamar" class="mb-5" enctype="multipart/form-data">
             @csrf
-            {{-- <div class="mb-3">
-                <label for="name" class="form-label">Nama Pelamar</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                    name="name" required autofocus value="{{ old('name') }}">
-                @error('name')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+            <div class="form-group">
+                <label for="user_id">User:</label>
+                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
+                    id="user_id">
+                    @foreach ($user as $users)
+                        <option value="{{ $users->id}}">{{ ucwords($users->name) }}</option>
+                    @endforeach
+                </select>
+                @error('job_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
-            </div> --}}
+            </div>
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
                 <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat"
@@ -38,7 +40,7 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                     </div>
                 @enderror
             </div>
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="pekerjaan_id">Pekerjaan:</label>
                 <select class="form-control @error('pekerjaan_id') is-invalid @enderror" name="pekerjaan_id"
                     id="pekerjaan_id">
@@ -50,20 +52,8 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="form-group">
-                <label for="user_id">User:</label>
-                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
-                    id="user_id">
-                    @foreach ($user as $users)
-                        <option value="{{ $users->id}}">{{ ucwords($users->name) }}</option>
-                    @endforeach
-                </select>
-                @error('job_id')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-            </div>
             <div class="mb-3">
-                <label for="pass_foto" class="form-label">Input an Image</label>
+                <label for="pass_foto" class="form-label">Pas Foto</label>
                 <img class="img-preview img-fluid mb-3 col-sm-5">
                 <input class="form-control" @error('pass_foto') is-invalid @enderror type="file" id="pass_foto"
                     name="pass_foto" onchange="previewImage()">
@@ -74,7 +64,7 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="cv" class="form-label">Input an Image</label>
+                <label for="cv" class="form-label">Foto CV</label>
                 <img class="img-preview img-fluid mb-3 col-sm-5">
                 <input class="form-control" @error('cv') is-invalid @enderror type="file" id="cv"
                     name="cv" onchange="previewImage()">

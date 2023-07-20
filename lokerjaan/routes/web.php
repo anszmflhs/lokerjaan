@@ -27,7 +27,7 @@ Route::get('/', function () {
 //         'title' => 'Post Pelamar',
 //         'active' => 'pelamar',
 //         'pelamar' => Pelamar::all()
-//         //Kalo semisal menggunakan load itu namanya eager loading untuk meringankan query supaya tidak lag dari N + 1 Problems
+        //Kalo semisal menggunakan load itu namanya eager loading untuk meringankan query supaya tidak lag dari N + 1 Problems
 //     ]);
 // });
 Route::prefix('pekerjaan')->group(function () {
@@ -44,7 +44,7 @@ Route::prefix('pelamar')->group(function () {
     Route::post('/', [PelamarController::class, 'store']);
     Route::get('/{id}', [PelamarController::class, 'edit']);
     Route::put('/{id}', [PelamarController::class, 'update']);
-    // Route::delete('/{id}', [PekerjaanController::class, 'destroy']);
+    Route::delete('/{id}', [PelamarController::class, 'destroy']);
 });
 Route::prefix('wawancara')->group(function () {
     Route::get('/', [WawancaraController::class, 'index']);

@@ -26,10 +26,8 @@ class PelamarController extends Controller
      */
     public function create()
     {
-
         $pekerjaan = Pekerjaan::all();
         $user = User::all();
-
         return view('pelamar.create', compact('pekerjaan', 'user'));
     }
 
@@ -38,14 +36,11 @@ class PelamarController extends Controller
      */
     public function store(Request $request)
     {
-
-        // return $request->file('pass_foto')->store('post-images');
         $validatedData = $request->validate([
-            // 'name' => 'required',
+            'user_id' => 'required',
             'alamat' => 'required',
             'ttl' => 'required',
             'pekerjaan_id' => 'required',
-            'user_id' => 'required',
             'pass_foto' => 'image|file|max:1024',
             'cv' => 'image|file|max:1024',
         ]);
@@ -82,10 +77,9 @@ class PelamarController extends Controller
      */
     public function edit(Pelamar $pelamar)
     {
-        return view('pelamar.edit', [
-            'pelamars' => $pelamar,
-            'pelamars' => Pelamar::all()
-        ]);
+        $pekerjaan = Pekerjaan::all();
+        $user = User::all();
+        return view('pelamar.edit', compact('pekerjaan', 'user'));
     }
 
     /**
@@ -94,11 +88,10 @@ class PelamarController extends Controller
     public function update(Request $request, Pelamar $pelamar)
     {
         $rules = [
-            'name' => 'required',
+            'user_id' => 'required|max:255',
             'alamat' => 'required',
             'ttl' => 'required',
             'pekerjaan_id' => 'required',
-            // 'user_id' => 'required',
             'pass_foto' => 'image|file|max:1024',
             'cv' => 'image|file|max:1024',
         ];
@@ -106,16 +99,23 @@ class PelamarController extends Controller
         $validatedData = $request->validate($rules);
 
         if ($request->file('pass_foto')) {
-            if ($request->oldImage) {
-                Storage::delete($request->oldImage);
+            $nameFile = $request->file('pass_foto')->getClientOriginalName();
+            $masukFile = $request->file('pass_foto')->storeAs('pass_foto/', $nameFile, 'public');
+            if ($masukFile) {
+                $validatedData['pass_foto'] = $nameFile;
             }
-            $validatedData['pass_foto'] = $request->file('pass_foto')->store('pass_foto');
+        }
+        if ($request->file('cv')) {
+            $nameFile = $request->file('cv')->getClientOriginalName();
+            $masukFile = $request->file('cv')->storeAs('cv/', $nameFile, 'public');
+            if ($masukFile) {
+                $validatedData['cv'] = $nameFile;
+            }
         }
 
         $validatedData['user_id'] = auth()->user()->id;
 
-        Pelamar::where('id', $pelamar->id)
-            ->update($validatedData);
+        Pelamar::where('id', $pelamar->id)->update($validatedData);
 
         return redirect('/pelamar')->with('success', 'Post has been updated!');
     }
@@ -125,6 +125,13 @@ class PelamarController extends Controller
      */
     public function destroy(Pelamar $pelamar)
     {
-        //
+        if ($pelamar->pass_foto) {
+            Storage::delete($pelamar->pass_foto);
+        }
+        if ($pelamar->curl_version) {
+            Storage::delete($pelamar->cv);
+        }
+        Pelamar::destroy($pelamar->id);
+        return redirect('/pelamar')->with('success', 'Post Has Been Deleted!');
     }
 }

@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
-            // $table->string('name');
             $table->string('alamat');
             $table->string('ttl');
             $table->foreignId('pekerjaan_id');
