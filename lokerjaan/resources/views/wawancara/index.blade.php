@@ -31,7 +31,7 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <td>
                         <a href="/wawancara/edit" class="btn btn-warning"><span
                                 data-feather="edit"></span></a>
-                        <form action="/wawancara" method="post" class="d-inline">
+                        <form action="/wawancara/{{ $wawancara->id }}" method="post" class="d-inline">
                             @method('delete')
                             @csrf
                             <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')"><span

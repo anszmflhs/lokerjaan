@@ -51,22 +51,9 @@ class PekerjaanController extends Controller
 
         return redirect('/pekerjaan')->with('success', 'Post has been updated!');
     }
-    public function destroy($id)
+    public function destroy($idPekerjaan)
     {
-        $pekerjaan = Pekerjaan::find($id);
-        if (!$pekerjaan) {
-            return response()->json(
-                [
-                    'status' => false,
-                    'message' => 'data not found'
-                ],
-                404
-            );
-        }
-        $pekerjaan->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'data succcessfully deleted'
-        ]);
+        Pekerjaan::destroy($idPekerjaan);
+        return redirect('/pekerjaan')->with('success', 'Post Has Been Deleted!');
     }
 }

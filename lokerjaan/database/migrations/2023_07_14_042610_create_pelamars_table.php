@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('ttl');
             $table->foreignId('pekerjaan_id');
             $table->foreignId('user_id');
-            $table->string('pass_foto');
-            $table->string('cv');
+            $table->string('pass_foto')->nullable();
+            $table->string('cv')->nullable();
             $table->timestamps();
         });
     }

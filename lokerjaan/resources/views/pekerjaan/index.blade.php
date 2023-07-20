@@ -23,20 +23,19 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
             </thead>
             <tbody>
                 @foreach ($pekerjaans as $pekerjaan)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $pekerjaan->title }}</td>
-                    <td>
-                        <a href="/pekerjaan/edit" class="btn btn-warning"><span
-                                data-feather="edit"></span></a>
-                        <form action="/pekerjaan" method="post" class="d-inline">
-                            @method('delete')
-                            @csrf
-                            <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')"><span
-                                    data-feather="x-circle"></span></button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $pekerjaan->title }}</td>
+                        <td>
+
+                            <a href="/pekerjaan/edit" class="btn btn-warning"><span data-feather="edit"></span></a>
+                            <form action="/pekerjaan/{{ $pekerjaan->id }}" method="post" class="d-inline">
+                                @method('DELETE')
+                                @csrf
+                                <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')"><span data-feather="x-circle"></span></button>
+                            </form>
+                        </td>
+                    </tr>
                 @endforeach
             </tbody>
         </table>

@@ -19,10 +19,10 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                 @enderror
             </div>
             <div class="mb-3">
-                <label for="tanggal_diterima" class="form-label">Tanggal Diterima:</label>
-                <input type="date" class="form-control @error('tanggal_diterima') is-invalid @enderror" id="tanggal_diterima"
-                    name="tanggal_diterima" required autofocus value="{{ old('tanggal_diterima') }}">
-                @error('tanggal_diterima')
+                <label for="tanggal_mulai" class="form-label">Tanggal Mulai:</label>
+                <input type="date" class="form-control @error('tanggal_mulai') is-invalid @enderror" id="tanggal_mulai"
+                    name="tanggal_mulai" required autofocus value="{{ old('tanggal_mulai') }}">
+                @error('tanggal_mulai')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>

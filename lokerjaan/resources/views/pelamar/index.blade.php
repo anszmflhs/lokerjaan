@@ -39,9 +39,9 @@ die(json_encode($pelamar));
                         <td>{{ $pelamar->ttl }}</td>
                         <td>{{ $pelamar->pekerjaans->title }}</td>
                         <td>
-                            @if ($pelamar->image)
+                            @if ($pelamar->pass_foto)
                                 <div style="width: 20px; overflow:hidden">
-                                    <img src="{{ asset('storage/' . $pelamars->image) }}" alt=""
+                                    <img src="{{ asset('storage/' . $pelamar->post_images) }}" alt=""
                                         class="img-fluid">
                                 </div>
                             @else
@@ -50,9 +50,9 @@ die(json_encode($pelamar));
                             @endif
                         </td>
                         <td>
-                            @if ($pelamar->image)
+                            @if ($pelamar->post_images)
                                 <div style="width: 20px; overflow:hidden">
-                                    <img src="{{ asset('storage/' . $pelamars->image) }}" alt=""
+                                    <img src="{{ asset('storage/' . $pelamar->post_images) }}" alt=""
                                         class="img-fluid">
                                 </div>
                             @else

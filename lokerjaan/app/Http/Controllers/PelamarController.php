@@ -34,15 +34,20 @@ class PelamarController extends Controller
      */
     public function store(Request $request)
     {
+
+        // return $request->file('pass_foto')->store('post-images');
         $validatedData = $request->validate([
             'name' => 'required',
             'alamat' => 'required',
             'ttl' => 'required',
             'pekerjaan_id' => 'required',
             'user_id' => 'required',
-            'pass_foto' => 'required',
-            'cv' => 'required',
+            'pass_foto' => 'image|file|max:1024',
+            'cv' => 'image|file|max:1024',
         ]);
+        if($request->file('image')) {
+            $validatedData['image'] = $request->file('image')->store('post-images');
+        }
 
         Pelamar::create($validatedData);
 
