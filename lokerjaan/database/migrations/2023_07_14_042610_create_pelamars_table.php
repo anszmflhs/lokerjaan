@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('pelamars', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            // $table->string('name');
             $table->string('alamat');
             $table->string('ttl');
             $table->foreignId('pekerjaan_id');
             $table->foreignId('user_id');
             $table->string('pass_foto')->nullable();
-            $table->string('cv')->nullable();
+            $table->string('cv');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class PelamarSeeder extends Seeder
     {
         $datas = [
             [
-                'name' => 'Anas Muflih',
+                // 'name' => 'Anas Muflih',
                 'alamat' => 'Jawa Tengah',
                 'ttl' => 'Indonesia, 17 April 2006',
                 'pekerjaan_id' => '1',
@@ -24,7 +24,7 @@ class PelamarSeeder extends Seeder
                 'user_id' => '1',
             ],
             [
-                'name' => 'Anas Muf',
+                // 'name' => 'Anas Muf',
                 'alamat' => 'Jawa Tengah',
                 'ttl' => 'Indonesia, 17 April 2006',
                 'pekerjaan_id' => '2',
@@ -33,7 +33,7 @@ class PelamarSeeder extends Seeder
                 'user_id' => '2',
             ],
             [
-                'name' => 'Nash Muf',
+                // 'name' => 'Nash Muf',
                 'alamat' => 'Jawa Tengah',
                 'ttl' => 'Indonesia, 17 April 2006',
                 'pekerjaan_id' => '3',

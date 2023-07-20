@@ -8,7 +8,7 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-lg-8">
         <form method="post"action="/pelamar" class="mb-5" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <label for="name" class="form-label">Nama Pelamar</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                     name="name" required autofocus value="{{ old('name') }}">
@@ -17,7 +17,7 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                         {{ $message }}
                     </div>
                 @enderror
-            </div>
+            </div> --}}
             <div class="mb-3">
                 <label for="alamat" class="form-label">Alamat</label>
                 <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat"
@@ -38,24 +38,28 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
                     </div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="pekerjaan_id" class="form-label">Pekerjaan ID</label>
-                <input type="text" class="form-control @error('pekerjaan_id') is-invalid @enderror" id="pekerjaan_id" name="pekerjaan_id"
-                    required autofocus value="{{ old('pekerjaan_id') }}">
-                @error('pekerjaan_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+            <div class="form-group">
+                <label for="pekerjaan_id">Pekerjaan:</label>
+                <select class="form-control @error('pekerjaan_id') is-invalid @enderror" name="pekerjaan_id"
+                    id="pekerjaan_id">
+                    @foreach ($pekerjaan as $pk)
+                        <option value="{{ $pk->id}}">{{ ucwords($pk->title) }}</option>
+                    @endforeach
+                </select>
+                @error('job_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
-            <div class="mb-3">
-                <label for="user_id" class="form-label">User ID</label>
-                <input type="text" class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id"
-                    required autofocus value="{{ old('user_id') }}">
-                @error('user_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+            <div class="form-group">
+                <label for="user_id">User:</label>
+                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
+                    id="user_id">
+                    @foreach ($user as $users)
+                        <option value="{{ $users->id}}">{{ ucwords($users->name) }}</option>
+                    @endforeach
+                </select>
+                @error('job_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">

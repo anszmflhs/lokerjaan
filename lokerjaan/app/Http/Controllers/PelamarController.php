@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pekerjaan;
 use App\Models\Pelamar;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,9 +26,11 @@ class PelamarController extends Controller
      */
     public function create()
     {
-        return view('pelamar.create', [
-            'pelamars' => Pelamar::all()
-        ]);
+
+        $pekerjaan = Pekerjaan::all();
+        $user = User::all();
+
+        return view('pelamar.create', compact('pekerjaan','user'));
     }
 
     /**
@@ -37,7 +41,7 @@ class PelamarController extends Controller
 
         // return $request->file('pass_foto')->store('post-images');
         $validatedData = $request->validate([
-            'name' => 'required',
+            // 'name' => 'required',
             'alamat' => 'required',
             'ttl' => 'required',
             'pekerjaan_id' => 'required',
@@ -45,8 +49,11 @@ class PelamarController extends Controller
             'pass_foto' => 'image|file|max:1024',
             'cv' => 'image|file|max:1024',
         ]);
-        if($request->file('image')) {
-            $validatedData['image'] = $request->file('image')->store('post-images');
+        if ($request->file('pass_foto')) {
+            $validatedData['pass_foto'] = $request->file('pass_foto')->store('post-images');
+        }
+        if ($request->file('cv')) {
+            $validatedData['cv'] = $request->file('cv')->store('post-images');
         }
 
         Pelamar::create($validatedData);

@@ -34,7 +34,7 @@ die(json_encode($pelamar));
                 @foreach ($pelamars as $pelamar)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $pelamar->name }}</td>
+                        <td>{{ $pelamar->users->name }}</td>
                         <td>{{ $pelamar->alamat }}</td>
                         <td>{{ $pelamar->ttl }}</td>
                         <td>{{ $pelamar->pekerjaans->title }}</td>
@@ -50,9 +50,9 @@ die(json_encode($pelamar));
                             @endif
                         </td>
                         <td>
-                            @if ($pelamar->post_images)
+                            @if ($pelamar->cv)
                                 <div style="width: 20px; overflow:hidden">
-                                    <img src="{{ asset('storage/' . $pelamar->post_images) }}" alt=""
+                                    <img src="{{ url('/') . Storage::url('public/') . $pelamar->cv }}" alt=""
                                         class="img-fluid">
                                 </div>
                             @else
