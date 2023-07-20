@@ -30,7 +30,7 @@ class PelamarController extends Controller
         $pekerjaan = Pekerjaan::all();
         $user = User::all();
 
-        return view('pelamar.create', compact('pekerjaan','user'));
+        return view('pelamar.create', compact('pekerjaan', 'user'));
     }
 
     /**
@@ -50,10 +50,18 @@ class PelamarController extends Controller
             'cv' => 'image|file|max:1024',
         ]);
         if ($request->file('pass_foto')) {
-            $validatedData['pass_foto'] = $request->file('pass_foto')->store('post-images');
+            $nameFile = $request->file('pass_foto')->getClientOriginalName();
+            $masukFile = $request->file('pass_foto')->storeAs('pass_foto/', $nameFile, 'public');
+            if ($masukFile) {
+                $validatedData['pass_foto'] = $nameFile;
+            }
         }
         if ($request->file('cv')) {
-            $validatedData['cv'] = $request->file('cv')->store('post-images');
+            $nameFile = $request->file('cv')->getClientOriginalName();
+            $masukFile = $request->file('cv')->storeAs('cv/', $nameFile, 'public');
+            if ($masukFile) {
+                $validatedData['cv'] = $nameFile;
+            }
         }
 
         Pelamar::create($validatedData);

@@ -40,9 +40,9 @@ die(json_encode($pelamar));
                         <td>{{ $pelamar->pekerjaans->title }}</td>
                         <td>
                             @if ($pelamar->pass_foto)
-                                <div style="width: 20px; overflow:hidden">
-                                    <img src="{{ asset('storage/' . $pelamar->post_images) }}" alt=""
-                                        class="img-fluid">
+                                <div style="width: 60px; overflow:hidden">
+                                    <img src="{{ url('/') . Storage::url('pass_foto/') . $pelamar->pass_foto }}"
+                                        alt="" class="img-fluid">
                                 </div>
                             @else
                                 <img src="https://source.unsplash.com/1200x400?" width="60px" height="40px"
@@ -51,8 +51,8 @@ die(json_encode($pelamar));
                         </td>
                         <td>
                             @if ($pelamar->cv)
-                                <div style="width: 20px; overflow:hidden">
-                                    <img src="{{ url('/') . Storage::url('public/') . $pelamar->cv }}" alt=""
+                                <div style="width: 60px; overflow:hidden">
+                                    <img src="{{ url('/') . Storage::url('cv/') . $pelamar->cv }}" alt=""
                                         class="img-fluid">
                                 </div>
                             @else
