@@ -9,13 +9,15 @@
             @method('PUT') {{-- Tambahkan metode PUT di sini --}}
             @csrf
             <div class="mb-3">
-                <label for="user_id" class="form-label">User ID</label>
-                <input type="text" class="form-control @error('user_id') is-invalid @enderror" id="user_id"
-                    name="user_id" required autofocus value="{{ old('user_id') }}">
-                @error('user_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                <label for="user_id">User:</label>
+                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
+                    id="user_id">
+                    @foreach ($user as $users)
+                        <option value="{{ $users->id}}">{{ ucwords($users->name) }}</option>
+                    @endforeach
+                </select>
+                @error('job_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">

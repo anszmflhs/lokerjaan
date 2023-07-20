@@ -63,7 +63,7 @@ die(json_encode($pelamar));
                         <td>
                             <a href="/pelamar/edit" class="btn btn-warning"><span data-feather="edit"></span></a>
                             <form action="/pelamar/{{ $pelamar->id }}" method="post" class="d-inline">
-                                @method('delete')
+                                @method('DELETE')
                                 @csrf
                                 <button class="btn btn-danger border-0" onclick="return confirm('Are you sure?')"><span
                                         data-feather="x-circle"></span></button>

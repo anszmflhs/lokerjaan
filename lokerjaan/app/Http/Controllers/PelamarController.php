@@ -123,14 +123,18 @@ class PelamarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pelamar $pelamar)
+    public function destroy($idPelamar)
     {
-        if ($pelamar->pass_foto) {
-            Storage::delete($pelamar->pass_foto);
+        $pelamar = Pelamar::find($idPelamar);
+
+        if (Storage::get('public/pass_foto/' . $pelamar->pass_foto)) {
+
+            Storage::delete('public/pass_foto/' . $pelamar->pass_foto);
         }
-        if ($pelamar->curl_version) {
-            Storage::delete($pelamar->cv);
+        if (Storage::get('public/cv/' . $pelamar->cv)) {
+            Storage::delete('public/cv/' . $pelamar->cv);
         }
+
         Pelamar::destroy($pelamar->id);
         return redirect('/pelamar')->with('success', 'Post Has Been Deleted!');
     }

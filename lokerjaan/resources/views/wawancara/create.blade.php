@@ -8,14 +8,16 @@ align-items-center pt-3 pb-2 mb-3 border-bottom">
     <div class="col-lg-8">
         <form method="post"action="/wawancara" class="mb-5" enctype="multipart/form-data">
             @csrf
-            <div class="mb-3">
-                <label for="user_id" class="form-label">User ID</label>
-                <input type="text" class="form-control @error('user_id') is-invalid @enderror" id="user_id"
-                    name="user_id" required autofocus value="{{ old('user_id') }}">
-                @error('user_id')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+            <div class="form-group">
+                <label for="user_id">User:</label>
+                <select class="form-control @error('user_id') is-invalid @enderror" name="user_id"
+                    id="user_id">
+                    @foreach ($user as $users)
+                        <option value="{{ $users->id}}">{{ ucwords($users->name) }}</option>
+                    @endforeach
+                </select>
+                @error('job_id')
+                    <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
             <div class="mb-3">

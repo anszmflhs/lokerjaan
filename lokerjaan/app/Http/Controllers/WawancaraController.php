@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Wawancara;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,8 @@ class WawancaraController extends Controller
     }
     public function create()
     {
-        return view('wawancara.create', [
-            'wawancaras' => Wawancara::all()
-        ]);
+        $user = User::all();
+        return view('wawancara.create', compact('user'));
     }
     public function store(Request $request)
     {
@@ -32,10 +32,8 @@ class WawancaraController extends Controller
     }
     public function edit(Wawancara $wawancara)
     {
-        return view('wawancara.edit', [
-            'wawancaras' => $wawancara,
-            'wawancaras' => Wawancara::all()
-        ]);
+        $user = User::all();
+        return view('wawancara.edit', compact('user'));
     }
     public function update(Request $request)
     {
